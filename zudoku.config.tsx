@@ -55,7 +55,7 @@ const config: ZudokuConfig = {
       label: "API Reference",
     },
   ],
-  redirects: [{ from: "/", to: "/introduction" }],
+  redirects: [],
   apis: [
     {
       type: "file",
