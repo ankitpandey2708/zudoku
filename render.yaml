@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: zudoku-backend
+    env: node
+    buildCommand: npm install
+    startCommand: npm run server
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: CLERK_SECRET_KEY
+        sync: false
+      - key: CLERK_JWKS_URI
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: PORT
+        value: 10000
