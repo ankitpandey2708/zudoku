@@ -16,3 +16,8 @@ services:
         sync: false
       - key: PORT
         value: 10000
+
+# Additional optional environment variables for domain-specific API keys
+# Uncomment and set if using paid-tier Unsplash API features:
+#     - key: yourdomain_UNSPLASH_KEY
+#       sync: false
