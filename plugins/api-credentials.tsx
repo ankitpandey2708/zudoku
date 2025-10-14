@@ -13,6 +13,7 @@ export const apiCredentials = (options: Credentials): ZudokuPlugin => {
         <script>
           {`
             (function() {
+              window.ZUDOKU_BACKEND_URL = '${backendUrl}';
               const originalFetch = window.fetch;
               window.fetch = function(...args) {
                 const [resource, options = {}] = args;
