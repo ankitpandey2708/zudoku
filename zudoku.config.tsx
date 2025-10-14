@@ -55,7 +55,7 @@ const config: ZudokuConfig = {
       label: "API Reference",
     },
   ],
-  redirects: [],
+  redirects: [{ from: "/", to: "/introduction" }],
   apis: [
     {
       type: "file",
@@ -65,12 +65,12 @@ const config: ZudokuConfig = {
   ],
   authentication: {
     type: "clerk",
-    clerkPubKey: "pk_live_dGlkeS1yYWNlci0xNy5jbGVyay5hY2NvdW50cy5kZXYk" as const
+    clerkPubKey:"pk_test_dGlkeS1yYWNlci0xNy5jbGVyay5hY2NvdW50cy5kZXYk"
   },
   protectedRoutes: ["/*"],
   plugins: [
     apiCredentials({
-      backendUrl: "https://zudoku-backend.onrender.com"
+      backendUrl: import.meta.env.ZUDOKU_PUBLIC_BACKEND_URL
     })
   ]
 };

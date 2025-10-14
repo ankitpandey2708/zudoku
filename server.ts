@@ -17,19 +17,10 @@ if (missingEnvVars.length > 0) {
 
 // Constants
 const FRONTEND_URL = process.env.FRONTEND_URL;
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT ;
 
 const app = express();
 
-// Health check endpoint for Render
-app.get('/', (req: Request, res: Response) => {
-  res.json({
-    status: 'OK',
-    timestamp: new Date().toISOString(),
-    service: 'Zudoku Backend API',
-    version: '1.0.0'
-  });
-});
 
 app.use(cors({
   origin: FRONTEND_URL,
