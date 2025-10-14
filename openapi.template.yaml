@@ -1,0 +1,132 @@
+openapi: 3.0.0
+info:
+  title: Multi-API Documentation
+  version: 1.0.0
+  description: API documentation with role-based access control
+servers:
+  - url: ${BACKEND_URL}/api
+    description: Local proxy server
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Authentication is automatic via Clerk session cookies
+security:
+  - bearerAuth: []
+tags:
+  - name: Basic
+    description: Free endpoints available to all users
+  - name: Paid
+    description: Requires paid subscription - upgrade to access
+paths:
+  /zippopotam/{country}/{postalCode}:
+    get:
+      tags:
+        - Basic
+      summary: Get location info by postal code
+      description: Free postal code API - available to all users
+      x-role: basic
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: country
+          in: path
+          required: true
+          schema:
+            type: string
+          example: us
+        - name: postalCode
+          in: path
+          required: true
+          schema:
+            type: string
+          example: '90210'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+  /httpbin/get:
+    get:
+      tags:
+        - Paid
+      summary: HTTP GET test
+      description: |
+        > ⚠️ **Requires Paid Subscription** - Upgrade your account to use this endpoint.
+
+        Test HTTP GET requests with various parameters and headers.
+      x-role: paid
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: test
+          in: query
+          schema:
+            type: string
+          example: value
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '403':
+          description: Upgrade required
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+  /unsplash/search/photos:
+    get:
+      tags:
+        - Paid
+      summary: Search photos
+      description: |
+        > ⚠️ **Requires Paid Subscription** - Upgrade your account to use this endpoint.
+
+        Search Unsplash's vast library of free photos.
+      x-role: paid
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: query
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Search query
+          example: nature
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+          description: Number of results per page
+          example: 10
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        '403':
+          description: Upgrade required
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
