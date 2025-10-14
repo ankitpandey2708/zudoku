@@ -4,10 +4,10 @@
   "installCommand": "npm install",
   "framework": null,
   "devCommand": "npm run dev",
-  "redirects": [
+  "rewrites": [
     {
-      "source": "/",
-      "destination": "/introduction"
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
     }
   ],
   "env": {
