@@ -1,6 +1,6 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": ".zudoku/dist",
+  "outputDirectory": "dist",
   "installCommand": "npm install",
   "framework": null,
   "devCommand": "npm run dev",
@@ -9,5 +9,8 @@
       "source": "/",
       "destination": "/introduction"
     }
-  ]
+  ],
+  "env": {
+    "ZUDOKU_PUBLIC_BACKEND_URL": "https://zudoku-backend.onrender.com"
+  }
 }
