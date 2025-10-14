@@ -32,7 +32,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use(cors({
-  origin: [FRONTEND_URL, 'https://zudoku.vercel.app', 'https://vercel.com'],
+  origin: FRONTEND_URL,
   credentials: true,
   exposedHeaders: ['set-cookie']
 }));
@@ -173,13 +173,8 @@ function checkApiAccess(apiPath: string, requiredRole: string) {
 
 // Set CORS headers on proxy responses
 function setCorsHeaders(proxyRes: any): void {
-  proxyRes.headers['access-control-allow-origin'] = ['https://zudoku.vercel.app', FRONTEND_URL, 'https://vercel.com'].find(origin =>
-    !origin || proxyRes.req.headers.host?.includes(origin.replace('https://', '')) ||
-    proxyRes.req.headers.origin?.includes(origin)
-  ) || FRONTEND_URL;
+  proxyRes.headers['access-control-allow-origin'] = FRONTEND_URL;
   proxyRes.headers['access-control-allow-credentials'] = 'true';
-  proxyRes.headers['access-control-allow-methods'] = 'GET, POST, PUT, DELETE, OPTIONS';
-  proxyRes.headers['access-control-allow-headers'] = 'Content-Type, Authorization';
 }
 
 // Helper function to create proxy middleware with common configuration
