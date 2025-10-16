@@ -7,23 +7,12 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 
 dotenv.config();
 
-// Validate required environment variables
-const requiredEnvVars = ['CLERK_SECRET_KEY', 'CLERK_JWKS_URI', 'FRONTEND_URL','PORT'];
-const missingEnvVars = requiredEnvVars.filter(varName => !process.env[varName]);
-
-if (missingEnvVars.length > 0) {
-  process.exit(1);
-}
-
-// Constants
-const FRONTEND_URL = process.env.FRONTEND_URL;
-const PORT = process.env.PORT ;
 
 const app = express();
 
 
 app.use(cors({
-  origin: FRONTEND_URL,
+  origin: process.env.FRONTEND_URL,
   credentials: true,
   exposedHeaders: ['set-cookie']
 }));
@@ -156,7 +145,7 @@ function checkApiAccess(apiPath: string, requiredRole: string) {
 
 // Set CORS headers on proxy responses
 function setCorsHeaders(proxyRes: any): void {
-  proxyRes.headers['access-control-allow-origin'] = FRONTEND_URL;
+  proxyRes.headers['access-control-allow-origin'] = process.env.FRONTEND_URL;
   proxyRes.headers['access-control-allow-credentials'] = 'true';
 }
 
@@ -241,4 +230,4 @@ registerApiRoute({
   }
 });
 
-app.listen(PORT, () => {});
+app.listen(process.env.PORT, () => {});

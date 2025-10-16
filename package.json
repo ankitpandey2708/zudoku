@@ -5,12 +5,11 @@
   "private": true,
   "scripts": {
     "predev": "tsx scripts/manage-openapi.ts",
-    "dev": "zudoku dev",
-    "server": "tsx server.ts",
-    "dev:all": "concurrently \"tsx scripts/manage-openapi.ts\" \"npm run dev\" \"npm run server\"",
+    "dev": "concurrently \"zudoku dev\" \"tsx server.ts\"",
     "prebuild": "tsx scripts/manage-openapi.ts",
     "build": "zudoku build",
-    "preview": "zudoku preview",
+    "prepreview": "tsx scripts/manage-openapi.ts",
+    "preview": "concurrently \"zudoku preview\" \"tsx server.ts\"",
     "lint": "eslint"
   },
   "dependencies": {
