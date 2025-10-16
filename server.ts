@@ -29,14 +29,6 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// HTTPS enforcement middleware (production only)
-app.use((req: Request, res: Response, next: NextFunction) => {
-  if (process.env.NODE_ENV === 'production' && !req.secure && req.get('x-forwarded-proto') !== 'https') {
-    return res.redirect(301, `https://${req.headers.host}${req.url}`);
-  }
-  next();
-});
-
 // Extend Express Request type to include user
 interface AuthenticatedRequest extends Request {
   user?: {
