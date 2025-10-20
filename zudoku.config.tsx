@@ -2,6 +2,7 @@ import type { ZudokuConfig } from "zudoku";
 import { apiCredentials } from "./plugins/api-credentials";
 
 const config: ZudokuConfig = {
+  basePath: "/zudoku",
   site: {
     title: "Documentation",
     logo: {

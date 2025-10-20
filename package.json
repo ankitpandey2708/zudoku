@@ -9,6 +9,7 @@
     "prebuild": "tsx scripts/manage-openapi.ts",
     "build": "zudoku build",
     "build:production": "tsx scripts/manage-openapi.ts --backend-url=https://zudoku-backend.onrender.com && zudoku build",
+    "build:gh-pages": "tsx scripts/manage-openapi.ts --backend-url=https://zudoku-backend.onrender.com && zudoku build",
     "server": "tsx server.ts",
     "lint": "eslint"
   },
