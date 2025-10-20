@@ -230,4 +230,4 @@ registerApiRoute({
   }
 });
 
-app.listen(process.env.PORT, () => {});
+app.listen(process.env.PORT || (process.env.NODE_ENV === 'production' ? 3000 : 3001), () => {});
