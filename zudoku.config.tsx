@@ -3,7 +3,7 @@ import { apiCredentials } from "./plugins/api-credentials";
 
 const config: ZudokuConfig = {
   site: {
-    title: "Finarkein Documentation",
+    title: "Documentation",
     logo: {
       src: { light: "/logo-light.svg", dark: "/logo-dark.svg" },
       alt: "Zudoku",
