@@ -33,6 +33,20 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Root route for health check
+app.get('/', (req: Request, res: Response) => {
+  res.json({
+    status: 'ok',
+    message: 'Zudoku Backend API is running',
+    version: '1.0.0',
+    endpoints: {
+      '/api/zippopotam': 'Zip code lookup service (basic access required)',
+      '/api/httpbin': 'HTTP testing service (paid access required)',
+      '/api/unsplash': 'Unsplash photo API (paid access required)'
+    }
+  });
+});
+
 // Extend Express Request type to include user
 interface AuthenticatedRequest extends Request {
   user?: {
