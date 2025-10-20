@@ -63,11 +63,11 @@ const config: ZudokuConfig = {
       path: "/api",
     },
   ],
-  // authentication: {
-  //   type: "clerk",
-  //   clerkPubKey:"pk_test_b3Blbi1ibHVlemF5LTMwLmNsZXJrLmFjY291bnRzLmRldiQ"
-  // },
-  // protectedRoutes: ["/*"],
+  authentication: {
+     type: "clerk",
+     clerkPubKey:"pk_test_b3Blbi1ibHVlemF5LTMwLmNsZXJrLmFjY291bnRzLmRldiQ"
+   },
+  protectedRoutes: ["/*"],
   plugins: [
     apiCredentials({
       backendUrl: import.meta.env.ZUDOKU_PUBLIC_BACKEND_URL || 'https://zudoku-backend.onrender.com'
