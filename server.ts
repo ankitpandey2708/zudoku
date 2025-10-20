@@ -12,9 +12,7 @@ const app = express();
 
 // Allow multiple CORS origins for development and production
 const allowedOrigins = [
-  process.env.FRONTEND_URL,
-  'https://zudoku.vercel.app',
-  'http://localhost:3000'
+  process.env.FRONTEND_URL
 ].filter(Boolean);
 
 app.use(cors({
