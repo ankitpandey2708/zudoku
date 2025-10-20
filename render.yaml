@@ -8,15 +8,15 @@ services:
       - key: CLERK_SECRET_KEY
         sync: false
       - key: CLERK_JWKS_URI
-        fromSecret: clerk_config
+        sync: false
       - key: FRONTEND_URL
-        value: https://zudoku.vercel.app
+        sync: false
       - key: ZUDOKU_PUBLIC_BACKEND_URL
-        value: https://zudoku-backend.onrender.com
+        sync: false
       - key: NODE_ENV
-        value: production
+        sync: false
       - key: PORT
-        value: 10000
+        sync: false
     # Add your API keys as secrets in Render dashboard
     secrets:
       - key: gmail_UNSPLASH_KEY
