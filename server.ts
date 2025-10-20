@@ -230,7 +230,7 @@ registerApiRoute({
   role: 'paid',
   beforeProxy: (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     const secrets = getUserSecrets(req.user?.email || '');
-
+    
     if (!secrets.unsplash) {
       res.status(500).json({ error: 'API key not configured for your domain' });
       return;
@@ -243,24 +243,6 @@ registerApiRoute({
     const secrets = getUserSecrets(authReq.user?.email || '');
     proxyReq.setHeader('Authorization', `Client-ID ${secrets.unsplash}`);
   }
-});
-
-// Health check endpoint
-app.get('/health', (req: Request, res: Response) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
-});
-
-// Basic root response
-app.get('/', (req: Request, res: Response) => {
-  res.json({
-    message: 'Zudoku Backend API',
-    status: 'running',
-    endpoints: [
-      '/api/zippopotam',
-      '/api/httpbin',
-      '/api/unsplash'
-    ]
-  });
 });
 
 app.listen(process.env.PORT || (process.env.NODE_ENV === 'production' ? 3000 : 3001), () => {});

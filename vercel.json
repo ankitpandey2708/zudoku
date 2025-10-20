@@ -1,24 +1,17 @@
 {
-  "version": 2,
-  "builds": [
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "redirects": [
     {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/((?!api/).*)",
-      "dest": "/$1"
+      "source": "/",
+      "destination": "/introduction"
     }
   ],
   "rewrites": [
     {
-      "source": "/((?!api/).*)",
-      "destination": "/index.html"
+      "source": "/api/:path*",
+      "destination": "https://zudoku-backend.onrender.com/api/:path*"
     }
   ]
 }
