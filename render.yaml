@@ -17,7 +17,7 @@ services:
         sync: false
       - key: PORT
         sync: false
-    # Add your API keys as secrets in Render dashboard
-    secrets:
       - key: gmail_UNSPLASH_KEY
         sync: false
+    # Add your API keys as secrets in Render dashboard
+    secrets:
