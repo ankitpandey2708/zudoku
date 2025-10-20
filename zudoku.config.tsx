@@ -70,7 +70,7 @@ const config: ZudokuConfig = {
   protectedRoutes: ["/*"],
   plugins: [
     apiCredentials({
-      backendUrl: import.meta.env.ZUDOKU_PUBLIC_BACKEND_URL
+      backendUrl: import.meta.env.ZUDOKU_PUBLIC_BACKEND_URL || 'https://zudoku-backend.onrender.com'
     })
   ]
 };

@@ -5,7 +5,7 @@ info:
   description: API documentation with role-based access control
 servers:
   - url: ${BACKEND_URL}/api
-    description: Local proxy server
+    description: API proxy server
 components:
   securitySchemes:
     bearerAuth:

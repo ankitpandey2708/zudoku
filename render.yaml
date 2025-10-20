@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: zudoku-backend
+    env: node
+    buildCommand: "npm ci && npx tsx scripts/manage-openapi.ts"
+    startCommand: "npx tsx server.ts"
+    envVars:
+      - key: CLERK_SECRET_KEY
+        sync: false
+      - key: CLERK_JWKS_URI
+        fromSecret: clerk_config
+      - key: FRONTEND_URL
+        value: https://zudoku.vercel.app
+      - key: ZUDOKU_PUBLIC_BACKEND_URL
+        value: https://zudoku-backend.onrender.com
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+    # Add your API keys as secrets in Render dashboard
+    secrets:
+      - key: gmail_UNSPLASH_KEY
+        sync: false

@@ -10,9 +10,24 @@ dotenv.config();
 
 const app = express();
 
+// Allow multiple CORS origins for development and production
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  'https://zudoku.vercel.app',
+  'http://localhost:3000'
+].filter(Boolean);
 
 app.use(cors({
-  origin: process.env.FRONTEND_URL,
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, etc.)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   exposedHeaders: ['set-cookie']
 }));
@@ -145,7 +160,7 @@ function checkApiAccess(apiPath: string, requiredRole: string) {
 
 // Set CORS headers on proxy responses
 function setCorsHeaders(proxyRes: any): void {
-  proxyRes.headers['access-control-allow-origin'] = process.env.FRONTEND_URL;
+  proxyRes.headers['access-control-allow-origin'] = 'https://zudoku.vercel.app';
   proxyRes.headers['access-control-allow-credentials'] = 'true';
 }
 

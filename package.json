@@ -8,8 +8,7 @@
     "dev": "concurrently \"zudoku dev\" \"tsx server.ts\"",
     "prebuild": "tsx scripts/manage-openapi.ts",
     "build": "zudoku build",
-    "prepreview": "tsx scripts/manage-openapi.ts",
-    "preview": "concurrently \"zudoku preview\" \"tsx server.ts\"",
+    "build:production": "tsx scripts/manage-openapi.ts --backend-url=https://zudoku-backend.onrender.com && zudoku build",
     "lint": "eslint"
   },
   "dependencies": {
