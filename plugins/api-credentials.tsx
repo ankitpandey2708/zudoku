@@ -13,6 +13,31 @@ export const apiCredentials = (options: Credentials): ZudokuPlugin => {
         <script>
           {`
             (function() {
+              // Helper function to wait for Clerk to be available
+              function waitForClerk(timeout = 5000) {
+                return new Promise((resolve) => {
+                  if (window.Clerk) {
+                    console.log('[API Credentials] Clerk already available');
+                    resolve(window.Clerk);
+                    return;
+                  }
+
+                  console.log('[API Credentials] Waiting for Clerk to load...');
+                  const startTime = Date.now();
+                  const interval = setInterval(() => {
+                    if (window.Clerk) {
+                      console.log('[API Credentials] Clerk loaded after', Date.now() - startTime, 'ms');
+                      clearInterval(interval);
+                      resolve(window.Clerk);
+                    } else if (Date.now() - startTime > timeout) {
+                      console.warn('[API Credentials] Clerk not available after', timeout, 'ms timeout');
+                      clearInterval(interval);
+                      resolve(null);
+                    }
+                  }, 50);
+                });
+              }
+
               const originalFetch = window.fetch;
               window.fetch = async function(...args) {
                 const [resource, options = {}] = args;
@@ -22,10 +47,12 @@ export const apiCredentials = (options: Credentials): ZudokuPlugin => {
                   // Try to get Clerk session token for cross-origin requests
                   let token = null;
                   try {
-                    // Wait for Clerk to be available
-                    if (window.Clerk) {
-                      console.log('[API Credentials] Clerk is available, getting session...');
-                      const session = await window.Clerk.session;
+                    // Wait for Clerk to be available (with 5 second timeout)
+                    const clerk = await waitForClerk(5000);
+
+                    if (clerk) {
+                      console.log('[API Credentials] Getting session from Clerk...');
+                      const session = await clerk.session;
                       if (session) {
                         console.log('[API Credentials] Session found, getting token...');
                         token = await session.getToken();
