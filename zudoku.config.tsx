@@ -70,11 +70,11 @@ const config: ZudokuConfig = {
   protectedRoutes: ["/*"],
   plugins: [
     apiCredentials({
-      // In production, use '/api' to match Vercel proxy
+      // In production (Vercel), use '/api' to match Vercel proxy
       // In development, use localhost
-      // Check both PROD boolean and MODE string for better compatibility
-      backendUrl: import.meta.env.ZUDOKU_PUBLIC_BACKEND_URL ||
-        (import.meta.env.PROD || import.meta.env.MODE === 'production' ? '/api' : 'http://localhost:3001')
+      backendUrl: import.meta.env.ZUDOKU_PUBLIC_BACKEND_URL !== undefined
+        ? (import.meta.env.ZUDOKU_PUBLIC_BACKEND_URL || '/api')
+        : (import.meta.env.PROD || import.meta.env.MODE === 'production' ? '/api' : 'http://localhost:3001')
     })
   ]
 };
