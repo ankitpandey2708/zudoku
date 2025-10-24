@@ -70,7 +70,10 @@ const config: ZudokuConfig = {
   protectedRoutes: ["/*"],
   plugins: [
     apiCredentials({
-      backendUrl: import.meta.env.ZUDOKU_PUBLIC_BACKEND_URL || 'https://zudoku-backend.onrender.com'
+      // In production, use '/api' to match Vercel proxy
+      // In development, use localhost
+      backendUrl: import.meta.env.ZUDOKU_PUBLIC_BACKEND_URL ||
+        (import.meta.env.MODE === 'production' ? '/api' : 'http://localhost:3001')
     })
   ]
 };

@@ -6,10 +6,12 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // Get backend URL from environment, check command line args first
+// In production, use empty string to make URLs relative (proxied by Vercel)
+// In development, use localhost
 const backendUrl: string =
   process.env.ZUDOKU_PUBLIC_BACKEND_URL ||
   (process.env.NODE_ENV === 'production'
-    ? 'https://zudoku-backend.onrender.com'
+    ? ''
     : 'http://localhost:3001');
 
 // Path to the template file

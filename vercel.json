@@ -8,5 +8,11 @@
       "source": "/",
       "destination": "/introduction"
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://zudoku-backend.onrender.com/api/:path*"
+    }
   ]
 }
