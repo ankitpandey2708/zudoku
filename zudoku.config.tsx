@@ -76,10 +76,11 @@ const config: ZudokuConfig = {
         {
           id: "clerk-auth",
           label: "Authenticated API Access",
-          authorizeRequest: (request) => {
-            // Get the access token from Clerk authentication provider
-            const token = context.authentication?.getAccessToken();
+          authorizeRequest: async (request) => {
+            // Get the access token from Clerk authentication provider (await the Promise)
+            const token = await context.authentication?.getAccessToken();
             console.log('[API Identity] Token obtained:', token ? 'YES' : 'NO');
+            console.log('[API Identity] Token value:', token ? token.substring(0, 20) + '...' : 'null');
 
             if (token) {
               request.headers.set("Authorization", `Bearer ${token}`);
