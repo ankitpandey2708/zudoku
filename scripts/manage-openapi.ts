@@ -2,27 +2,19 @@ import fs from 'fs';
 import yaml from 'js-yaml';
 import dotenv from 'dotenv';
 
-// Command line args take precedence
-const commandLineUrl = process.argv.find(arg => arg.startsWith('--backend-url='))?.split('=')[1];
+
+dotenv.config();
 
 // Get backend URL from environment, check command line args first
 const backendUrl: string =
-  commandLineUrl ||
   process.env.ZUDOKU_PUBLIC_BACKEND_URL ||
   (process.env.NODE_ENV === 'production'
     ? 'https://zudoku-backend.onrender.com'
     : 'http://localhost:3001');
 
-// Load .env only if we don't have command line overrides
-if (!commandLineUrl && !process.env.ZUDOKU_PUBLIC_BACKEND_URL) {
-  dotenv.config();
-}
-
 // Path to the template file
 const templatePath = './openapi.template.yaml'; // Use a different name for template
 const outputPath = './openapi.yaml';
-
-console.log(`Generating OpenAPI spec with backend URL: ${backendUrl}`);
 
 try {
   // Check if template file exists

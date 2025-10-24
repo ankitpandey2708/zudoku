@@ -172,7 +172,7 @@ function checkApiAccess(apiPath: string, requiredRole: string) {
 
 // Set CORS headers on proxy responses
 function setCorsHeaders(proxyRes: any): void {
-  proxyRes.headers['access-control-allow-origin'] = 'https://zudoku.vercel.app';
+  proxyRes.headers['access-control-allow-origin'] = process.env.FRONTEND_URL;
   proxyRes.headers['access-control-allow-credentials'] = 'true';
 }
 
