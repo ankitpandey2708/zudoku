@@ -65,12 +65,18 @@ function getKey(header: jwt.JwtHeader, callback: jwt.SigningKeyCallback): void {
   });
 }
 
-// Extract and verify session token from cookie (Clerk session)
+// Extract and verify session token from Authorization header or cookie (Clerk session)
 async function authenticateToken(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
   let token: string | undefined;
 
-  // Get token from Clerk session cookie
-  if (req.headers.cookie) {
+  // First, try to get token from Authorization header (for cross-origin requests)
+  const authHeader = req.headers.authorization;
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    token = authHeader.substring(7); // Remove 'Bearer ' prefix
+  }
+
+  // Fall back to cookie if no Authorization header (for same-origin/local development)
+  if (!token && req.headers.cookie) {
     const cookies = req.headers.cookie.split(';').reduce((acc: Record<string, string>, cookie: string) => {
       const [key, value] = cookie.trim().split('=');
       acc[key] = value;
