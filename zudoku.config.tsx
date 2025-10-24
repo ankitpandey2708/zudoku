@@ -1,5 +1,7 @@
 import type { ZudokuConfig } from "zudoku";
-import { apiCredentials } from "./plugins/api-credentials";
+import { createApiIdentityPlugin } from "zudoku/plugins";
+
+const backendUrl = import.meta.env.ZUDOKU_PUBLIC_BACKEND_URL || 'https://zudoku-backend.onrender.com';
 
 const config: ZudokuConfig = {
   site: {
@@ -69,9 +71,28 @@ const config: ZudokuConfig = {
   },
   protectedRoutes: ["/*"],
   plugins: [
-    apiCredentials({
-      backendUrl: import.meta.env.ZUDOKU_PUBLIC_BACKEND_URL || 'https://zudoku-backend.onrender.com'
-    })
+    createApiIdentityPlugin({
+      getIdentities: async (context) => [
+        {
+          id: "clerk-auth",
+          label: "Authenticated API Access",
+          authorizeRequest: (request) => {
+            // Get the access token from Clerk authentication provider
+            const token = context.authentication?.getAccessToken();
+            console.log('[API Identity] Token obtained:', token ? 'YES' : 'NO');
+
+            if (token) {
+              request.headers.set("Authorization", `Bearer ${token}`);
+              console.log('[API Identity] Authorization header set for:', request.url);
+            } else {
+              console.warn('[API Identity] No token available for request:', request.url);
+            }
+
+            return request;
+          },
+        },
+      ],
+    }),
   ]
 };
 
