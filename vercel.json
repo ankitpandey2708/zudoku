@@ -5,14 +5,7 @@
   "redirects": [
     {
       "source": "/",
-      "destination": "/introduction",
-      "permanent": false
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/((?!\\.html).*)",
-      "destination": "/index.html"
+      "destination": "/introduction"
     }
   ]
 }
