@@ -72,8 +72,9 @@ const config: ZudokuConfig = {
     apiCredentials({
       // In production, use '/api' to match Vercel proxy
       // In development, use localhost
+      // Check both PROD boolean and MODE string for better compatibility
       backendUrl: import.meta.env.ZUDOKU_PUBLIC_BACKEND_URL ||
-        (import.meta.env.MODE === 'production' ? '/api' : 'http://localhost:3001')
+        (import.meta.env.PROD || import.meta.env.MODE === 'production' ? '/api' : 'http://localhost:3001')
     })
   ]
 };
