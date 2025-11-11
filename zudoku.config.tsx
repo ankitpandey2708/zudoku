@@ -67,7 +67,7 @@ const config: ZudokuConfig = {
   ],
   authentication: {
     type: "clerk",
-    clerkPubKey:"pk_test_b3Blbi1ibHVlamF5LTMwLmNsZXJrLmFjY291bnRzLmRldiQ"
+    clerkPubKey:"pk_test_dGlkeS1yYWNlci0xNy5jbGVyay5hY2NvdW50cy5kZXYk"
   },
   protectedRoutes: ["/*"],
   plugins: [
