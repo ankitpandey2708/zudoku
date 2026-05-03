@@ -1,0 +1,12 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": ["zudoku.config.tsx"],
+  "ignoreDependencies": [
+    "@clerk/clerk-js",
+    "@typescript-eslint/eslint-plugin",
+    "@typescript-eslint/parser"
+  ],
+  "tags": [
+    "-lintignore"
+  ]
+}

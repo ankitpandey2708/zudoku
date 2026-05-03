@@ -1,0 +1,44 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "prepare": "tsx scripts/manage-openapi.ts",
+    "dev": "concurrently \"npm run server\" \"zudoku dev\"",
+    "build": "zudoku build",
+    "server": "tsx server.ts",
+    "lint": "eslint",
+    "knip": "knip"
+  },
+  "dependencies": {
+    "@clerk/clerk-js": "^6.8.0",
+    "concurrently": "^9.2.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "http-proxy-middleware": "^3.0.5",
+    "js-yaml": "^4.1.1",
+    "jsonwebtoken": "^9.0.3",
+    "jwks-rsa": "^4.0.1",
+    "react": ">=19.2.5",
+    "react-dom": ">=19.2.5",
+    "zudoku": "0.76.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/js-yaml": "^4.0.9",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^25.6.0",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@typescript-eslint/eslint-plugin": "^8",
+    "@typescript-eslint/parser": "^8",
+    "eslint": "^9",
+    "knip": "^6.11.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "vite": "^8.0.10"
+  }
+}
